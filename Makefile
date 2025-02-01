@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -Ilib/libft -fsanitize=address -g
-NAME = philosophers
+NAME = philo
 
 SRC = srcs/main.c \
 

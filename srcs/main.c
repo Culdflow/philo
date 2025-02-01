@@ -6,11 +6,11 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:24:49 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/01 09:30:47 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/01 09:36:22 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "../include/philo.h"
 
 int	main()
 {
