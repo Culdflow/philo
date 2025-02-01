@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 09:24:49 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/01 12:34:57 by dfeve            ###   ########.fr       */
+/*   Created: 2025/02/01 12:25:37 by dfeve             #+#    #+#             */
+/*   Updated: 2025/02/01 12:38:02 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-t_time	*set_argv_time(char **argv)
+int	time_time(struct timeval *tv)
 {
-	t_time	*result;
-
-	result = malloc(sizeof(t_time));
-	result->time_to_die = ft_atoi(argv[2]);
-	result->time_to_eat = ft_atoi(argv[3]);
-	result->time_to_sleep = ft_atoi(argv[4]);
-	return (result);
-}
-
-int	main(int argc, char **argv)
-{
-	(void)argc;
-	(void)argv;
-	struct timeval	tv;
+	struct timeval	real_time;
 	
-	gettimeofday(&tv, NULL);
-	time_time(&tv);
+	(void)tv;
+	gettimeofday(&real_time, NULL);
+	printf("Seconds since 1/1/1970: %lu\n",real_time.tv_usec);
+	return (0);
 }

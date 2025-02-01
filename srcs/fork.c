@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:50:22 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/01 11:45:24 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/01 12:36:54 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_fork	*fork_new(t_fork *prev, int index)
 	result->philo = NULL;
 	result->next = NULL;
 	result->prev = prev;
+	result->index = index;
 	return (result);
 }
 

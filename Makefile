@@ -3,6 +3,9 @@ CFLAGS = -Wall -Werror -Wextra -Ilib/libft -fsanitize=address -g
 NAME = philo
 
 SRC = srcs/main.c \
+	srcs/fork.c \
+	srcs/philo.c \
+	srcs/time.c \
 
 OBJS = ${SRC:.c=.o}
 
