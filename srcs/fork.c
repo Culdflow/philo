@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 09:25:42 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/01 09:42:48 by dfeve            ###   ########.fr       */
+/*   Created: 2025/02/01 09:50:22 by dfeve             #+#    #+#             */
+/*   Updated: 2025/02/01 09:54:43 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#include "../include/philo.h"
 
-# include <stdlib.h>
-
-typedef struct s_philo
+t_fork	*fork_new()
 {
-	struct s_philo	next;
-	struct s_philo	prev;
-	struct s_fork	*right_hand;
-	struct s_fork	*left_hand;
-}	t_philo;
+	t_fork	*result;
 
-typedef struct s_fork
+	result = malloc(sizeof(t_fork));
+	result->philo = NULL;
+	result->next = NULL;
+	return (result);
+}
+
+t_fork	*fork_make_lst(int	nb)
 {
-	struct s_fork	next;
-	t_philo	*philo;
-}	t_fork;
+	int		i;
+	t_fork	*fork;
+	t_fork	*result;
 
-#endif
+	fork = fork_new();
+	result = fork;
+	i = 0;
+	while (i++ < nb)
+	{
+		fork->next = fork_new();
+		fork = fork->next;
+	}
+	return (result);
+}
