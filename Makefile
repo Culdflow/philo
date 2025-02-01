@@ -27,7 +27,7 @@ lib/libft/libft.a:
 		@make -C lib/libft > /dev/null 2>&1
 
 ${NAME}: lib/libft/libft.a ${OBJS}
-		$(call loading_bar, "Building pushswap")
+		$(call loading_bar, "Building philo")
 		@${CC} ${CFLAGS} ${OBJS} -o ${NAME} -L./lib/libft -lft > /dev/null 2>&1
 
 fclean: clean
