@@ -6,6 +6,7 @@ SRC = srcs/main.c \
 	srcs/fork.c \
 	srcs/philo.c \
 	srcs/time.c \
+	srcs/error.c \
 
 OBJS = ${SRC:.c=.o}
 

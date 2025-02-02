@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:50:22 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/01 12:36:54 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/02 22:41:04 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_fork	*fork_new(t_fork *prev, int index)
 	t_fork	*result;
 
 	result = malloc(sizeof(t_fork));
-	result->philo = NULL;
+	pthread_mutex_init(&result->mutex, NULL);
 	result->next = NULL;
 	result->prev = prev;
 	result->index = index;
