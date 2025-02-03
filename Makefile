@@ -7,6 +7,9 @@ SRC = srcs/main.c \
 	srcs/philo.c \
 	srcs/time.c \
 	srcs/error.c \
+	srcs/philo_dead.c \
+	srcs/philo_extra_extra.c \
+	srcs/philo_extra.c \
 
 OBJS = ${SRC:.c=.o}
 
@@ -32,7 +35,7 @@ lib/libft/libft.a:
 
 ${NAME}: lib/libft/libft.a ${OBJS}
 		$(call loading_bar, "Building philo")
-		@${CC} ${CFLAGS} ${OBJS} -o ${NAME} -L./lib/libft -lft > /dev/null 2>&1
+		@${CC} ${CFLAGS} ${OBJS} -o ${NAME} -L./lib/libft -lft #> /dev/null 2>&1
 
 fclean: clean
 		$(call loading_bar, "Cleaning up ${NAME}")

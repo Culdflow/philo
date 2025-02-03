@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:25:42 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/03 01:04:54 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/04 00:29:46 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef struct s_time
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
-	struct timeval	*time_since_last_ate;
+	long long	time_project_start;
+	long long	time_last_ate;
 }	t_time;
 
 typedef struct s_fork
@@ -39,6 +40,7 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	int				index;
+	int				dead;
 	struct s_philo	*next;
 	struct s_philo	*prev;
 	pthread_mutex_t	*print_mutex;
@@ -52,6 +54,7 @@ typedef struct s_all
 {
 	t_philo			*philo;
 	t_fork			*forks;
+	pthread_t		check_death_thread;
 	pthread_mutex_t	print_mutex;
 }	t_all;
 
@@ -66,7 +69,12 @@ void	philo_die(t_philo *philo);
 void	mutex_print(char *str, t_philo *philo);
 t_philo	*philo_get_first(t_philo *philo);
 void	philo_print_list(t_philo *start);
-void	close_threads(t_philo *start);
+void	close_threads(t_philo *start, t_all *all);
+void	philo_sleeping(t_philo *philo);
+void	set_philo_dead(t_philo *philo);
+void	check_if_dead(t_philo *philo);
+void	*philo_check_if_dead(void *args);
+void	philo_set_fork(t_philo *start, t_fork *forks);
 
 //------------------------- FORK -----------------------------
 
@@ -78,12 +86,11 @@ t_fork	*fork_get_first(t_fork *fork);
 
 //------------------------- TIME -----------------------------
 
-float			get_time_past(struct timeval *tv);
-void			time_free(t_time *time);
-struct timeval	*get_time();
+long long		get_time();
 
 //------------------------ ERROR -----------------------------
 
 void	ft_error(char *str, int error_code);
+void	my_usleep(int wait_time, t_philo *philo);
 
 #endif

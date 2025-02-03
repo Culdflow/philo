@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   philo_dead.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 05:00:37 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 00:50:02 by dfeve            ###   ########.fr       */
+/*   Created: 2025/02/03 22:56:18 by dfeve             #+#    #+#             */
+/*   Updated: 2025/02/04 00:31:23 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	ft_error(char *str, int error_code)
+void	set_philo_dead(t_philo *philo)
 {
-	ft_printf("\e[1;31m[ERROR]\e[0m : ");
-	ft_printf("%s\n", str);
-	exit(error_code);
+	philo = philo_get_first(philo);
+	while (philo)
+	{
+		philo->dead = 1;
+		philo = philo->next;
+	}
 }
 
-void	my_usleep(int wait_time, t_philo *philo)
+void	check_if_dead(t_philo *philo)
 {
-	long long	start_time;
-
-	start_time = get_time();
-	while ((int)(get_time() - start_time) < wait_time)
-	{
-		usleep(100);
-		check_if_dead(philo);
-	}
+	if (philo->dead == 1)
+		exit(0);
 }
