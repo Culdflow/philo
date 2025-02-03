@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:39:41 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/03 00:41:23 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/03 01:10:48 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void	philo_free(t_philo	*start)
 {
 	t_philo	*next;
 
-	start->prev->next = NULL;
+	start = philo_get_first(start);
 	while (start)
 	{
 		next = start->next;
@@ -170,7 +170,8 @@ void	philo_die(t_philo *philo)
 void	mutex_print(char *str, t_philo *philo)
 {
 	pthread_mutex_lock(philo->print_mutex);
-	printf("%ld : philosopher %d %s", get_time()->tv_sec, philo->index, str);
+	printf("%ld %d %s", get_time()->tv_sec, philo->index, str);
+	// printf("%ld : philosopher %d %s", get_time()->tv_sec, philo->index, str);
 	pthread_mutex_unlock(philo->print_mutex);
 }
 
@@ -181,7 +182,7 @@ void	*philo_thread(void *args)
 	philo = (t_philo *)args;
 	while (1)
 	{
-		philo_sleeping(philo);
 		philo_eat(philo);
+		philo_sleeping(philo);
 	}
 }

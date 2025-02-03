@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:25:42 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/03 00:37:12 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/03 01:04:54 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo
 	pthread_mutex_t	*print_mutex;
 	t_fork			*right_hand;
 	t_fork			*left_hand;
+	pthread_t		thread;
 	t_time			*time;
 }	t_philo;
 
@@ -65,6 +66,7 @@ void	philo_die(t_philo *philo);
 void	mutex_print(char *str, t_philo *philo);
 t_philo	*philo_get_first(t_philo *philo);
 void	philo_print_list(t_philo *start);
+void	close_threads(t_philo *start);
 
 //------------------------- FORK -----------------------------
 
@@ -72,6 +74,7 @@ t_fork	*fork_new(t_fork *prev, int index);
 t_fork	*fork_make_lst(int	nb);
 t_fork	*fork_getfrom_index(t_fork *start, int index);
 void	fork_free(t_fork *start);
+t_fork	*fork_get_first(t_fork *fork);
 
 //------------------------- TIME -----------------------------
 

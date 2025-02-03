@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:24:49 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/03 00:37:30 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/03 01:05:09 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	create_philo_thread(t_philo *philo)
 {
-	pthread_t	*thread;
-
 	if (!philo)
 		return ;
 	printf("created thread\n");
 	printf("philo nb: %d\n", philo->index);
-	thread = malloc(sizeof(pthread_t));
-	pthread_create(thread, NULL, philo_thread, philo);
+	pthread_create(&philo->thread, NULL, philo_thread, philo);
+	
 }
 
 int	main(int argc, char **argv)
@@ -49,7 +47,18 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_error("a valid number of philosophers is needed", 1);
-	//philo_free(all_struct->philo);
+	close_threads(all_struct->philo);
+	philo_free(all_struct->philo);
 	fork_free(all_struct->forks);
 	free(all_struct);
+}
+
+void	close_threads(t_philo *start)
+{
+	start = philo_get_first(start);
+	while (start)
+	{
+		pthread_join(start->thread, NULL);
+		start = start->next;
+	}
 }
