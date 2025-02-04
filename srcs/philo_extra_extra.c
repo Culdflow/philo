@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 22:54:42 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 00:49:51 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/04 05:06:29 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,27 @@
 
 void	philo_eat(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->right_hand->mutex);
-	mutex_print("has taken a fork\n", philo);
-	pthread_mutex_lock(&philo->left_hand->mutex);
-	mutex_print("has taken a fork\n", philo);
+	if (philo->index % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->right_hand->mutex);
+		mutex_print("has taken a fork\n", philo);
+		pthread_mutex_lock(&philo->left_hand->mutex);
+		mutex_print("has taken a fork\n", philo);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->left_hand->mutex);
+		mutex_print("has taken a fork\n", philo);
+		pthread_mutex_lock(&philo->right_hand->mutex);
+		mutex_print("has taken a fork\n", philo);
+	}
 	mutex_print("is eating\n", philo);
+	pthread_mutex_lock(philo->set_eating_mutex);
 	philo->time->time_last_ate = get_time();
+	pthread_mutex_unlock(philo->set_eating_mutex);
+	pthread_mutex_lock(philo->is_eating_mutex);
+	philo->times_ate++;
+	pthread_mutex_unlock(philo->is_eating_mutex);
 	my_usleep(philo->time->time_to_eat, philo);
 	pthread_mutex_unlock(&philo->right_hand->mutex);
 	pthread_mutex_unlock(&philo->left_hand->mutex);
@@ -55,7 +70,6 @@ void	mutex_print(char *str, t_philo *philo)
 {
 	pthread_mutex_lock(philo->print_mutex);
 	printf("%lld %d %s", get_time() - philo->time->time_project_start, philo->index, str);
-	// printf("%ld : philosopher %d %s", get_time()->tv_sec, philo->index, str);
 	pthread_mutex_unlock(philo->print_mutex);
 }
 

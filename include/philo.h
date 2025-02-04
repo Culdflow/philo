@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:25:42 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 00:29:46 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/04 04:59:35 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_time
 	int			time_to_die;
 	int			time_to_eat;
 	int			time_to_sleep;
+	int			nb_times_eat;
 	long long	time_project_start;
 	long long	time_last_ate;
 }	t_time;
@@ -41,12 +42,16 @@ typedef struct s_philo
 {
 	int				index;
 	int				dead;
+	int				times_ate;
 	struct s_philo	*next;
 	struct s_philo	*prev;
 	pthread_mutex_t	*print_mutex;
 	t_fork			*right_hand;
 	t_fork			*left_hand;
 	pthread_t		thread;
+	pthread_mutex_t	*is_dead_mutex;
+	pthread_mutex_t	*is_eating_mutex;
+	pthread_mutex_t	*set_eating_mutex;
 	t_time			*time;
 }	t_philo;
 
@@ -55,13 +60,17 @@ typedef struct s_all
 	t_philo			*philo;
 	t_fork			*forks;
 	pthread_t		check_death_thread;
+	pthread_t		check_how_many_times_ate;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	is_dead_mutex;
+	pthread_mutex_t	is_eating_mutex;
+	pthread_mutex_t	set_eating_mutex;
 }	t_all;
 
 //------------------------- PHILO ----------------------------
 
 t_philo	*philo_new(t_philo *prev, t_philo *next, int index, char **argv);
-t_philo	*philo_make_lst(int	philo_nb, char **argv, t_fork *forks, pthread_mutex_t *print_mutex);
+t_philo	*philo_make_lst(int	philo_nb, char **argv, t_all *all);
 t_philo	*philo_getfrom_index(t_philo *start, int index);
 void	philo_free(t_philo	*start);
 void	*philo_thread(void *args);
@@ -75,6 +84,7 @@ void	set_philo_dead(t_philo *philo);
 void	check_if_dead(t_philo *philo);
 void	*philo_check_if_dead(void *args);
 void	philo_set_fork(t_philo *start, t_fork *forks);
+void	*philo_check_if_ate_enough(void *args);
 
 //------------------------- FORK -----------------------------
 

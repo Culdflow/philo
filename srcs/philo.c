@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:39:41 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 00:35:04 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/04 04:10:05 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ t_time	*set_argv_time(char **argv)
 	result->time_to_die = ft_atoi(argv[2]);
 	result->time_to_eat = ft_atoi(argv[3]);
 	result->time_to_sleep = ft_atoi(argv[4]);
+	if (argv[5])
+		result->nb_times_eat = ft_atoi(argv[5]);
+	else
+		result->nb_times_eat = 0;
 	result->time_last_ate = get_time();
 	result->time_project_start = get_time();
 	return (result);
@@ -34,18 +38,9 @@ t_philo	*philo_new(t_philo *prev, t_philo *next, int index, char **argv)
 	result->prev = prev;
 	result->index = index;
 	result->dead = 0;
+	result->times_ate = 0;
 	result->time = set_argv_time(argv);
 	return (result);
-}
-
-void	philo_print_list(t_philo *start)
-{
-	start = philo_get_first(start);
-	while (start)
-	{
-		printf("philo nb %d\n", start->index);
-		start = start->next;
-	}
 }
 
 t_philo	*philo_get_first(t_philo *philo)

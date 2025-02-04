@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -Ilib/libft -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra -Ilib/libft -fsanitize=thread -g
 NAME = philo
 
 SRC = srcs/main.c \
