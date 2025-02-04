@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 22:54:42 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 05:06:29 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/04 05:15:45 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,15 @@ void	*philo_check_if_dead(void *args)
 	{
 		while (philo)
 		{
+			pthread_mutex_lock(philo->set_eating_mutex);
 			if ((get_time() - philo->time->time_last_ate) >= philo->time->time_to_die)
 			{
+				pthread_mutex_unlock(philo->set_eating_mutex);
 				philo_die(philo);
 				set_philo_dead(philo);
 				exit(0);
 			}
+			pthread_mutex_unlock(philo->set_eating_mutex);
 			philo = philo->next;
 		}
 		philo = philo_og;

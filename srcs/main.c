@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:24:49 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 04:58:17 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/04 05:09:26 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	create_philo_thread(t_philo *philo)
 	if (!philo)
 		return ;
 	pthread_create(&philo->thread, NULL, philo_thread, philo);
-	usleep(100);
 }
 
 void	create_philo_checkifdead_thread(t_philo *philo, t_all *all)
