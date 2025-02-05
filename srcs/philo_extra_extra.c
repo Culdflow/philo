@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 22:54:42 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 05:15:45 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/05 18:40:03 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,18 @@ void	philo_eat(t_philo *philo)
 
 void	*philo_check_if_dead(void *args)
 {
-	t_philo *philo = (t_philo *)args;
-	t_philo	*philo_og = philo_get_first(philo);
+	t_philo	*philo;
+	t_philo	*philo_og;
 
+	philo = (t_philo *)args;
+	philo_og = philo_get_first(philo);
 	while (1)
 	{
 		while (philo)
 		{
 			pthread_mutex_lock(philo->set_eating_mutex);
-			if ((get_time() - philo->time->time_last_ate) >= philo->time->time_to_die)
+			if ((get_time() - philo->time->time_last_ate)
+				>= philo->time->time_to_die)
 			{
 				pthread_mutex_unlock(philo->set_eating_mutex);
 				philo_die(philo);
@@ -69,10 +72,12 @@ void	philo_die(t_philo *philo)
 	mutex_print("has died of hunger\n", philo);
 }
 
-void	mutex_print(char *str, t_philo *philo)
+void	mutex_print(char *str,
+		t_philo *philo)
 {
 	pthread_mutex_lock(philo->print_mutex);
-	printf("%lld %d %s", get_time() - philo->time->time_project_start, philo->index, str);
+	printf("%lld %d %s", get_time() - philo->time->time_project_start,
+		philo->index, str);
 	pthread_mutex_unlock(philo->print_mutex);
 }
 

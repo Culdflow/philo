@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 22:53:57 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 04:59:38 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/05 18:37:13 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	philo_set_mutex(t_philo *philo, t_all *all)
 	}
 }
 
-t_philo	*philo_make_lst(int	philo_nb, char **argv, t_all *all)
+t_philo	*philo_make_lst(int philo_nb, char **argv, t_all *all)
 {
 	int		i;
 	t_philo	*result;

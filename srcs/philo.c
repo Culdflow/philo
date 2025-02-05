@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:39:41 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/04 04:10:05 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/05 18:35:58 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	philo_set_fork(t_philo *start, t_fork *forks)
 	while (philo_start)
 	{
 		philo_start->left_hand = fork_getfrom_index(forks, philo_start->index);
-		philo_start->right_hand = fork_getfrom_index(forks, philo_start->index + 1);
+		philo_start->right_hand = fork_getfrom_index(forks,
+				philo_start->index + 1);
 		if (!philo_start->right_hand)
 			philo_start->right_hand = fork_getfrom_index(forks, 0);
 		philo_start = philo_start->next;

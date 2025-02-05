@@ -6,7 +6,7 @@
 /*   By: dfeve <dfeve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 09:50:22 by dfeve             #+#    #+#             */
-/*   Updated: 2025/02/03 00:52:09 by dfeve            ###   ########.fr       */
+/*   Updated: 2025/02/05 18:36:30 by dfeve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_fork	*fork_get_first(t_fork *fork)
 	return (fork);
 }
 
-t_fork	*fork_make_lst(int	nb)
+t_fork	*fork_make_lst(int nb)
 {
 	int		i;
 	t_fork	*fork;
